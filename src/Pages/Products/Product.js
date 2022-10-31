@@ -1,7 +1,25 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
-const Product = ({ product }) => {
-    const { id, name, photoURL, price, quantity } = product;
+const Product = ({ product, displayProducts, setDisplayProducts }) => {
+    const { _id, name, photoURL, price, quantity } = product;
+
+    const handleDelete = () => {
+        const agree = window.confirm("Are you sure to delet this product?");
+        if (agree) {
+            fetch(`http://localhost:5000/products/${_id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast.success("Product deleted successfully!");
+                        const remainingProducts = displayProducts.filter(product => product._id !== _id);
+                        setDisplayProducts(remainingProducts);
+                    }
+                })
+        }
+    }
 
     return (
         <tr>
@@ -13,7 +31,7 @@ const Product = ({ product }) => {
             </td>
             <td>
                 <button className='btn btn-info me-3'>UPDATE</button>
-                <button className='btn btn-danger'>DELETE</button>
+                <button onClick={handleDelete} className='btn btn-danger'>DELETE</button>
             </td>
         </tr>
     );

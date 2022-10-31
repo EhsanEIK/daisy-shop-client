@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Link, useLoaderData } from 'react-router-dom';
 import Product from './Product';
@@ -6,9 +6,11 @@ import Product from './Product';
 const Products = () => {
     const products = useLoaderData();
 
+    const [displayProducts, setDisplayProducts] = useState(products);
+
     return (
         <div className='mt-5'>
-            <h2 className='text-center'>Total Products: {products.length}</h2>
+            <h2 className='text-center'>Total Products: {displayProducts.length}</h2>
             <Link to='/addProducts'>
                 <button className='btn btn-primary mt-3 mb-5'>Add Product</button>
             </Link>
@@ -24,9 +26,11 @@ const Products = () => {
                 </thead>
                 <tbody>
                     {
-                        products.map(product => <Product
+                        displayProducts.map(product => <Product
                             key={product._id}
-                            product={product}></Product>)
+                            product={product}
+                            displayProducts={displayProducts}
+                            setDisplayProducts={setDisplayProducts}></Product>)
                     }
                 </tbody>
             </Table>
