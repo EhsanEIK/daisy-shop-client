@@ -3,6 +3,7 @@ import { FloatingLabel } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const AddProduct = () => {
     const [product, setProduct] = useState();
@@ -77,6 +78,11 @@ const AddProduct = () => {
                 <Button variant="primary" type="submit">
                     Add Product
                 </Button>
+                <Link to='/manageProducts'>
+                    <Button variant="info" type="submit" className='ms-3'>
+                        Show All
+                    </Button>
+                </Link>
             </Form>
         </div>
     );
