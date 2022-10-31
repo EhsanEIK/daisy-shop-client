@@ -1,5 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const Product = ({ product, displayProducts, setDisplayProducts }) => {
     const { _id, name, photoURL, price, quantity } = product;
@@ -30,7 +31,9 @@ const Product = ({ product, displayProducts, setDisplayProducts }) => {
                 <img src={photoURL} className="w-25 h-25" alt={name} />
             </td>
             <td>
-                <button className='btn btn-info me-3'>UPDATE</button>
+                <Link to={`/products/${_id}`}>
+                    <button className='btn btn-info me-3'>UPDATE</button>
+                </Link>
                 <button onClick={handleDelete} className='btn btn-danger'>DELETE</button>
             </td>
         </tr>
