@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { FloatingLabel } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -10,7 +11,7 @@ const AddProduct = () => {
 
     const handleAddProduct = event => {
         event.preventDefault();
-        fetch('http://localhost:5000/products', {
+        /* fetch('http://localhost:5000/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -20,6 +21,14 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
+                    toast.success("Product added successfully!");
+                    event.target.reset();
+                }
+            }) */
+
+        axios.post('http://localhost:5000/products', product)
+            .then(data => {
+                if (data.data.acknowledged) {
                     toast.success("Product added successfully!");
                     event.target.reset();
                 }
